@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inköslistan till Mahmuds FETA FEEEEST!</title>
+</head>
+<body>
+
+<h1>Inköpslista</h1>
+<br>
+<h4>Vad vill du handla till Mahmuds FEEEEST!</h2>
+
+<form onsubmit="return false">
+    <label id="labb1" for="item"></label>
+    <input id="labb2" type="text">
+    
+    
+    <button id="knapp">Lägg till</button>
+</form>
+
+<p id="hej">ghhgjghgjhhgjghj</p>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>$(document).ready(function() {
+   // console.log("Hello jQuery");
+//$("#knapp").click(function(){console.log($("#labb2").val());});
+
+//$("#knapp").click(function(){$(hej.after($("#labb2").val()));});
+
+//$("#knapp").click(function(){$("#hej").after($("#labb2").val());});
+$("#knapp").click(function(){
+    $("#hej").after("<button class='boll'>"+ $("#labb2").val()+" </button>"+"<br>");
+    $(".boll").click(function(){$(this).hide()});
+
+});
+
+//$("#knapp").click(function(){$("#knapp").prop("disabled", true);});
+
+    // $("p").hide();
+     //$("#demo1").hide();
+    // $("#demo2").animate();
+     $(".boll").click(function(){$(this).remove()});
+     $("#hej").click(function(){$("#hej").hide()});
+
+
+     });</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Rubrik</h1>
+    <p>Lorem ipsum dolor s, recusandae?</p>
+    <div id="demo1">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit, unde.</div>
+    <div id="demo2">Lorem, LÖKSÅS dolor sit amet consectetur adipisicing elit. Velit, unde.</div>
+
+
+  <h2>THIS Selector</h2>
+  <h4>Klicka här för att ta bort mig</h4><h4>Klicka här för att ta bort mig</h4><h4>Klicka här för att ta bort mig</h4><h4>Klicka här för att ta bort mig</h4>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>$(document).ready(function() {
+    console.log("Hello jQuery");
+
+     $("p").hide();
+     $("#demo1").hide();
+     $("#demo2").animate();
+     $("h4").click(function(){$(this).hide()})
+
+
+     });</script>
+</body>
+</html>

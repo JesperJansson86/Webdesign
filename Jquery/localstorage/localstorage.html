@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage</title>
+</head>
+<body>
+    
+
+    <script>
+        //Spara i LS
+       localStorage.setItem("myName","Jesper");
+       localStorage.setItem("myLastName","Jansson");
+       localStorage.setItem("myage","35");
+//Hämta frpn LS
+let mn = localStorage.getItem("myName");
+console.log(mn);
+
+
+
+
+//Visa alla nycklar
+for (let i =0; i < localStorage.length; i++){
+    console.log("Kry: " + localStorage.key(i));
+}
+//Ta bort från LS
+localStorage.removeItem("myAge");
+
+//rensa allt från LS
+console.log(localStorage)
+localStorage.clear();
+console.log(localStorage)
+
+
+//spara Arrayer och objekt i LS
+const myArray = ["A","B","C"];
+
+localStorage.setItem("myArrayAsString", myArray);
+localStorage.setItem("myRealArray", JSON.stringify(myArray));
+
+//Hämta array
+const arrayFromLS = localStorage.getItem("myRealArray");
+console.log(arrayFromLS); //OBS! En sträng.
+console.log(typeof(arrayFromLS)); // String
+
+//Vi måste convertera stränger till Array på riktigt
+const realArrayFromLS = JSON.parse(localStorage.getItem("myArray"));
+
+
+
+//spara ett objekt i LS
+const myObject = {
+    first : "A",
+    second : "B",
+    third : "C",
+};
+//måset serialiseras
+localStorage.setItem("myObject", JSON.stringify(myObject));
+
+//hämta object från LS
+const myObjectFromLS = JSON.parse(localStorage.getItem("myObject"));
+console.log(myObjectFromLS);
+
+
+    </script>
+</body>
+</html>
