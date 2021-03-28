@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sortiment</title>
+</head>
+<body>
+    <button onclick="window.location.href='order.html'">Till varukorgen</button>
+    <h1>Sortiment</h1>
+    <div id= products></div>
+
+    <script>
+
+let count = 1;
+fetch("https://fakestoreapi.com/products")
+.then((string)=> string.json())
+.then((data)=> {
+    let count = 1;
+while (count <= 5){
+let prod1 = data[count];
+//localStorage.setItem("product1", JSON.stringify(data[1]))
+let output = `
+${prod1.title}<br>
+<p style="width:30%">${prod1.description}</p><br>
+
+<image src='${prod1.image}' width='10%'><br>
+    ${prod1.price} <br>
+    <button id="button${count}">Lägg till i varukorg</button><br>
+    
+`;
+document.getElementById("products").innerHTML += output
+
+count++;
+} 
+
+document.getElementById(`button1`).addEventListener("click",addtocart1)
+document.getElementById(`button2`).addEventListener("click",addtocart2)  
+document.getElementById(`button3`).addEventListener("click",addtocart3)
+document.getElementById(`button4`).addEventListener("click",addtocart4)
+document.getElementById(`button5`).addEventListener("click",addtocart5)
+function addtocart1(){
+    localStorage.setItem("product1", JSON.stringify(data[1]))
+    if (localStorage.getItem("product1amount")==null){
+        localStorage.setItem("product1amount",1)
+        alert("Lagd i varukorgen!")
+    }else{
+        localStorage.setItem("product1amount",(parseInt(localStorage.getItem("product1amount"))+1))
+        alert("Lagd i varukorgen!")
+    }
+    }
+    function addtocart2(){
+    localStorage.setItem("product2", JSON.stringify(data[2]))
+    if (localStorage.getItem("product2amount")==null){
+        localStorage.setItem("product2amount",1)
+        alert("Lagd i varukorgen!")
+    }else{
+        localStorage.setItem("product2amount",(parseInt(localStorage.getItem("product2amount"))+1))
+        alert("Lagd i varukorgen!")
+    }
+    }
+    function addtocart3(){
+    localStorage.setItem("product3", JSON.stringify(data[3]))
+    if (localStorage.getItem("product3amount")==null){
+        localStorage.setItem("product3amount",1)
+        alert("Lagd i varukorgen!")
+    }else{
+        localStorage.setItem("product3amount",(parseInt(localStorage.getItem("product3amount"))+1))
+        alert("Lagd i varukorgen!")
+    }
+    }
+    function addtocart4(){
+    localStorage.setItem("product4", JSON.stringify(data[4]))
+    if (localStorage.getItem("product4amount")==null){
+        localStorage.setItem("product4amount",1)
+        alert("Lagd i varukorgen!")
+    }else{
+        localStorage.setItem("product4amount",(parseInt(localStorage.getItem("product4amount"))+1))
+        alert("Lagd i varukorgen!")
+    }
+    }
+    function addtocart5(){
+    localStorage.setItem("product5", JSON.stringify(data[5]))
+    if (localStorage.getItem("product5amount")==null){
+        localStorage.setItem("product5amount",1)
+        alert("Lagd i varukorgen!")
+    }else{
+        localStorage.setItem("product5amount",(parseInt(localStorage.getItem("product5amount"))+1))
+        alert("Lagd i varukorgen!")
+    }
+    }
+})
+    </script>
+</body>
+</html>

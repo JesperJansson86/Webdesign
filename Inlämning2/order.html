@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Varukorgen</title>
+</head>
+
+<body>
+    <button onclick="window.location.href='index.html'">Till sortiment</button>
+    <h1>Varukorgen</h1>
+<div id="item1"></div>
+<div id="item2"></div>
+<div id="item3"></div>
+<div id="item4"></div>
+<div id="item5"></div>
+<div id="total"></div>
+    <form id="form1" name="form1" onsubmit="orderFunction()" >
+<label for="name">Namn</label>
+<input type="text" id="name"  name="name1" pattern="[a-z A-Z]{2,30}" title="Endast bokstäver, 2-30tecken." placeholder="Ditt namn" required><br>
+<label for="phone">Telefon nummer</label>
+<input type="number" id="phone" name="phone" placeholder="Ditt telefonnr" title="Endast siffror." required ><br>
+<label for="email">Mailadress</label>
+<input type="email" id="email" name="email" placeholder="Din e-mail" title="Var god skriv in en giltig emailadress." required><br>
+<label for="adress">Leveransadress</label>
+<input type="text" id="adress" name="adress" placeholder="Din adress" title="Var god skriv in postadress." required><br>
+<input type ="Submit" id="order" value="order" disabled="disabled" >Beställ!
+    </form>
+    <div id="output"></div>
+    
+    <script>
+       
+    document.forms["form1"]["name1"].value = localStorage.getItem("name")
+    document.forms["form1"]["phone"].value = localStorage.getItem("phone")
+    document.forms["form1"]["email"].value = localStorage.getItem("email")
+    document.forms["form1"]["adress"].value = localStorage.getItem("adress")
+      
+        updateitems(1)
+        updateitems(2)
+        updateitems(3)
+        updateitems(4)
+        updateitems(5)
+        updatetotal()
+
+        function updateitems(number){
+         if(parseInt(localStorage.getItem(`product${number}amount`))>0){
+           let prod = JSON.parse(localStorage.getItem(`product${number}`))
+            let output = `
+            ${prod.title}<br>
+
+        <image src='${prod.image}' width='5%'><br>
+    ${parseFloat(prod.price)*parseFloat(localStorage.getItem(`product${number}amount`))} <br>
+    <button id="prod${number}-">-</button> ${parseInt(localStorage.getItem(`product${number}amount`))} <button id="prod${number}+">+</button>
+    `
+    document.getElementById(`item${number}`).innerHTML = output;
+    document.getElementById(`prod${number}-`).addEventListener("click",prod1minus)
+    document.getElementById(`prod${number}+`).addEventListener("click",prod1plus)
+    function prod1minus(){
+        localStorage.setItem(`product${number}amount`,(parseInt(localStorage.getItem(`product${number}amount`))-1))
+        updateitems(`${number}`)
+        updatetotal()
+    }
+    function prod1plus(){
+        localStorage.setItem(`product${number}amount`,(parseInt(localStorage.getItem(`product${number}amount`))+1))
+        updateitems(`${number}`)
+        updatetotal()
+    }
+
+       }
+    else{document.getElementById(`item${number}`).innerHTML =""
+
+    }}
+function updatetotal(){
+    let prod;
+    let total = 0;
+    if (localStorage.getItem(`product1amount`)>0){
+     prod = JSON.parse(localStorage.getItem(`product1`))
+     total = parseFloat(localStorage.getItem("product1amount"))*parseFloat(prod.price)}
+     if (localStorage.getItem(`product2amount`)>0){
+     prod = JSON.parse(localStorage.getItem(`product2`))
+     total += parseFloat(localStorage.getItem("product2amount"))*parseFloat(prod.price)}
+     if (localStorage.getItem(`product3amount`)>0){
+     prod = JSON.parse(localStorage.getItem(`product3`))
+    total += parseFloat(localStorage.getItem("product3amount"))*parseFloat(prod.price)}
+    if (localStorage.getItem(`product4amount`)>0){
+     prod = JSON.parse(localStorage.getItem(`product4`))
+    total += parseFloat(localStorage.getItem("product4amount"))*parseFloat(prod.price)}
+    if (localStorage.getItem(`product5amount`)>0){
+     prod = JSON.parse(localStorage.getItem(`product5`))
+     total += parseFloat(localStorage.getItem("product5amount"))*parseFloat(prod.price)}
+    
+    document.getElementById("total").innerHTML = "Totalt: "+total
+    return total
+}
+
+
+     
+        function orderFunction(){
+            
+        
+
+            var txt;
+var r = confirm(`Vill du konfirmera denna beställning på ${updatetotal()}:-`);
+if (r == true) {
+  alert("Tack för din beställning! PS. Det tillkommer frakt på 10000000000000!")
+  localStorage.clear()
+} else {
+    localStorage.setItem("name",document.forms["form1"]["name1"].value);
+    localStorage.setItem("phone",document.forms["form1"]["phone"].value);
+    localStorage.setItem("email",document.forms["form1"]["email"].value);
+    localStorage.setItem("adress",document.forms["form1"]["adress"].value);
+}
+        
+        };
+        (function holdsubmit() {
+    $('form > input').keyup(function() {
+  var empty = false;
+        $('form > input').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+ if (empty) {
+            $('#order').attr('disabled', 'disabled'); 
+        } else {
+            $('#order').removeAttr('disabled'); 
+        }
+    });
+})()
+
+    </script>
+</body>
+</html>
